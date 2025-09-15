@@ -1,0 +1,83 @@
+# LaTeX build artifacts
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.fmt
+*.fot
+*.cb
+*.cb2
+.*.lb
+*.bbl
+*.bcf
+*.blg
+*-blx.aux
+*-blx.bib
+*.run.xml
+*.fdb_latexmk
+*.synctex
+*.synctex(busy)
+*.synctex.gz
+*.synctex.gz(busy)
+*.pdfsync
+*.nav
+*.snm
+*.vrb
+*.soc
+*.cut
+*.bak
+*.bbg
+*.nlo
+
+# Bibliography
+*.brf
+*.dvi
+*.idx
+*.ilg
+*.ind
+*.ist
+*.loe
+*.los
+*.nls
+*.nlg
+*.nlo
+*.glo
+*.glg
+*.gls
+*.glsdefs
+*.xdy
+
+# Build directories
+/build/
+/output/
+
+# PDF output (uncomment if you don't want to track PDFs)
+# *.pdf
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Editor files
+*.txss2
+*.sublime-*
+*.swp
+*.swo
+*~
+.texpadtmp
+
+# LaTeX editors
+*.backup
+*.bak
+*.tmp
+TSWLatexianTemp*
+
+# Python (if using any scripts)
+__pycache__/
+*.py[cod]
+*$py.class
