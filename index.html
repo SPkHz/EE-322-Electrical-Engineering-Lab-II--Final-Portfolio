@@ -115,12 +115,12 @@
                 Zoom Out
             </button>
             
-            <a href="main.pdf" download class="btn">
+            <a href="EE_322_Final_Lab_Portfolio_Placzek.pdf" download class="btn">
                 ⬇ Download PDF
             </a>
             
             <a href="https://github.com/SPkHz/EE-322-Electrical-Engineering-Lab-II--Final-Portfolio" class="btn">
-                📁 View Repository
+                [View Repository
             </a>
         </div>
     </div>
@@ -217,14 +217,14 @@
         }
         
         // Load PDF
-        pdfjsLib.getDocument('main.pdf').promise.then(function(pdfDoc_) {
+        pdfjsLib.getDocument('EE_322_Final_Lab_Portfolio_Placzek.pdf').promise.then(function(pdfDoc_) {
             pdfDoc = pdfDoc_;
             document.getElementById('totalPages').textContent = pdfDoc.numPages;
             renderPage(pageNum);
         }).catch(function(error) {
             console.error('Error loading PDF:', error);
             document.getElementById('viewerContainer').innerHTML = 
-                '<p style="text-align: center; padding: 50px;">Error loading PDF. Please <a href="main.pdf" style="color: #58a6ff;">download it directly</a>.</p>';
+                '<p style="text-align: center; padding: 50px;">Error loading PDF. Please <a href="EE_322_Final_Lab_Portfolio_Placzek.pdf" style="color: #58a6ff;">download it directly</a>.</p>';
         });
         
         // Keyboard navigation
