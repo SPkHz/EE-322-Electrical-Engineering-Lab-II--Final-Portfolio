@@ -1,0 +1,237 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EE-322 | Electrical Engineering Lab II | Final Portfolio | Steven Placzek</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        
+        .header {
+            background: #0d1117;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid #30363d;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 8px 16px;
+            background: #238636;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        
+        .btn:hover {
+            background: #2ea043;
+        }
+        
+        .btn.secondary {
+            background: #21262d;
+            border: 1px solid #30363d;
+        }
+        
+        .btn.secondary:hover {
+            background: #30363d;
+        }
+        
+        #pdf-viewer {
+            width: 100%;
+            height: calc(100vh - 100px);
+            border: none;
+        }
+        
+        .page-info {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #0d1117;
+            padding: 10px 15px;
+            border-radius: 6px;
+            border: 1px solid #30363d;
+        }
+        
+        input[type="number"] {
+            width: 50px;
+            padding: 4px;
+            background: #0d1117;
+            color: white;
+            border: 1px solid #30363d;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>EE-322 Electrical Engineering Lab II - Final Portfolio</h1>
+        <div class="controls">
+            <button class="btn secondary" onclick="previousPage()">
+                ← Previous
+            </button>
+            
+            <span style="display: inline-flex; align-items: center; gap: 5px;">
+                Page <input type="number" id="pageNum" value="1" min="1" onchange="goToPage()"> 
+                of <span id="totalPages">-</span>
+            </span>
+            
+            <button class="btn secondary" onclick="nextPage()">
+                Next →
+            </button>
+            
+            <button class="btn secondary" onclick="zoomIn()">
+                Zoom In
+            </button>
+            
+            <button class="btn secondary" onclick="zoomOut()">
+                Zoom Out
+            </button>
+            
+            <a href="main.pdf" download class="btn">
+                ⬇ Download PDF
+            </a>
+            
+            <a href="https://github.com/SPkHz/EE-322-Electrical-Engineering-Lab-II--Final-Portfolio" class="btn">
+                📁 View Repository
+            </a>
+        </div>
+    </div>
+    
+    <div id="viewerContainer">
+        <canvas id="pdfCanvas"></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        
+        let pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 1.5,
+            canvas = document.getElementById('pdfCanvas'),
+            ctx = canvas.getContext('2d');
+        
+        function renderPage(num) {
+            pageRendering = true;
+            pdfDoc.getPage(num).then(function(page) {
+                let viewport = page.getViewport({scale: scale});
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                
+                canvas.style.display = 'block';
+                canvas.style.margin = '0 auto';
+                
+                let renderContext = {
+                    canvasContext: ctx,
+                    viewport: viewport
+                };
+                let renderTask = page.render(renderContext);
+                
+                renderTask.promise.then(function() {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
+            });
+            
+            document.getElementById('pageNum').value = num;
+        }
+        
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+        
+        function previousPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+        
+        function nextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+        
+        function goToPage() {
+            let input = document.getElementById('pageNum');
+            let page = parseInt(input.value);
+            if (page >= 1 && page <= pdfDoc.numPages) {
+                pageNum = page;
+                queueRenderPage(pageNum);
+            } else {
+                input.value = pageNum;
+            }
+        }
+        
+        function zoomIn() {
+            scale += 0.25;
+            queueRenderPage(pageNum);
+        }
+        
+        function zoomOut() {
+            if (scale > 0.5) {
+                scale -= 0.25;
+                queueRenderPage(pageNum);
+            }
+        }
+        
+        // Load PDF
+        pdfjsLib.getDocument('main.pdf').promise.then(function(pdfDoc_) {
+            pdfDoc = pdfDoc_;
+            document.getElementById('totalPages').textContent = pdfDoc.numPages;
+            renderPage(pageNum);
+        }).catch(function(error) {
+            console.error('Error loading PDF:', error);
+            document.getElementById('viewerContainer').innerHTML = 
+                '<p style="text-align: center; padding: 50px;">Error loading PDF. Please <a href="main.pdf" style="color: #58a6ff;">download it directly</a>.</p>';
+        });
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') previousPage();
+            if (e.key === 'ArrowRight') nextPage();
+        });
+    </script>
+</body>
+</html>
