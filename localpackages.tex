@@ -1,0 +1,131 @@
+%%% Encoding and Fonts
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{fontspec}
+\usepackage{newtxtext}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{tabularx}
+%\usepackage{mathastext}
+%%% Page Layout and Spacing
+\usepackage{geometry}
+\geometry{a4paper, margin=1in}
+\usepackage{parskip}
+\parskip=0.5ex
+\usepackage{setspace}
+%%% Headers and Footers
+\usepackage{fancyhdr}
+\setlength{\headheight}{14.5pt}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[R]{Page \thepage\ of \pageref{LastPage}}
+\fancyfoot[R]{\leftmark: \rightmark}
+
+%%% Math and Symbols
+\usepackage{amsmath, amssymb, amsthm}
+
+%%% Tables and Arrays
+\usepackage{array, multirow, makecell, booktabs}
+\renewcommand{\arraystretch}{1.3}
+\usepackage{floatrow}
+\DeclareFloatFont{Large}{\Large}
+\floatsetup[table]{font=Large}
+
+%%% Figures and Graphics
+\usepackage{graphicx}
+\graphicspath{{./images/}}
+\DeclareGraphicsExtensions{.pdf,.png}
+\usepackage{caption}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\usepackage{placeins}
+\usepackage{pdfpages}
+\usepackage{tcolorbox}
+
+%%% Hyperlinks and References
+\usepackage[hidelinks]{hyperref}
+\usepackage{cleveref}
+
+%%% Code Listings
+\usepackage{pythonhighlight}
+\usepackage{listings}
+\usepackage{lstfiracode} % For Fira Code font style
+\usepackage{fancyvrb}
+
+\lstset{
+    language=Python,
+    style=FiraCodeStyle,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    stringstyle=\color{green!50!black},
+    commentstyle=\color{gray},
+    showstringspaces=false,
+    breaklines=true,
+    tabsize=4,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    frame=single,
+    frameround=tttt,
+    rulesepcolor=\color{black},
+    postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space}
+}
+
+%%% Typography and Lists
+\usepackage{xcolor}
+\definecolor{dgreen}{rgb}{0.,0.6,0.}
+\definecolor{ochre}{cmyk}{0, .42, .83, .20}
+\usepackage{enumitem}
+\usepackage{url}
+\usepackage[normalem]{ulem}
+\usepackage{titlesec}
+\usepackage{anyfontsize}
+\usepackage{ragged2e}
+\DeclareFloatFont{Large}{\Large}
+
+\catcode"200B=9 % Ignore the zero-width space character
+
+%%% Custom Commands
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+% Reference macros
+\newcommand{\sref}[1]{\S\ref{#1}}
+\newcommand{\srefs}[2]{\S\S\ref{#1}--\ref{#2}}
+\newcommand{\eref}[1]{(\thechapter.\ref{#1})}
+\newcommand{\erefs}[2]{\eref{#1}--\eref{#2}}
+\newcommand{\earef}[2]{(\ref{#1}\ref{#2})}
+\newcommand{\sbref}[1]{(\S\ref{#1})}
+\newcommand{\reff}[1]{\hspace*{\fill}{\mbox{#1}}}
+\newcommand{\refex}[2][]{\hfill\citep[#1]{#2}}
+\newcommand{\reftex}[1]{\hspace*{\fill}\mbox{(#1)}}
+\newcommand{\tref}[1]{Table~\ref{#1}\xspace}
+\newcommand{\tpref}[1]{Table~\ref{#1} on page~\pageref{#1}\xspace}
+\newcommand{\trefs}[2]{Tables~\ref{#1} and~\ref{#2}\xspace}
+\newcommand{\fref}[1]{Figure~\ref{#1}\xspace}
+\newcommand{\chref}[1]{Chapter~\ref{#1}\xspace}
+\newcommand{\chrefs}[2]{Chapters~\ref{#1}--\ref{#2}\xspace}
+\newcommand{\pref}[1]{page~\pageref{#1}\xspace}
+\newcommand{\prefs}[2]{pages~\pageref{#1}--\pageref{#2}\xspace}
+\newcommand{\aref}[1]{Appendix~\ref{#1}\xspace}
+\newcommand{\qcite}[1]{\citeauthor{#1}'s (\citeyear{#1})\xspace}
+
+% Text styling commands
+\newcommand{\comm}[1]{\textsl{\textbf{\large{{#1}}}}}
+\newcommand{\tit}[1]{\textit{{#1}}}
+\newcommand{\tbf}[1]{\textbf{{#1}}}
+\newcommand{\tsc}[1]{\textsc{{#1}}}
+\newcommand{\fno}[1]{\footnote{\small #1}}
+\newcommand{\nfno}[1]{\footnote{\tbf{#1}}}
+\newcommand{\ul}[1]{\underline{{#1}}}
+\renewcommand{\>}{\ensuremath >\xspace}
+\newcommand{\<}{\ensuremath <\xspace}
+\newcommand{\var}{\ensuremath{\sim}\xspace}
+\newcommand{\eg}{e.g.\@\xspace}
+\newcommand{\ie}{i.e.\@\xspace}
+\newcommand{\nd}{n.d.\@\xspace}
+\newcommand{\cf}{cf.\@\xspace}

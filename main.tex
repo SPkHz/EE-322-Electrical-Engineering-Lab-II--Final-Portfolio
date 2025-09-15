@@ -1,0 +1,134 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8 Unicode
+% !TeX spellcheck = en_EN-EnglishUnitedKingdom
+% !TeX document-id = {6c471d8e-23aa-4982-9fb3-f8c46004c042}
+\documentclass[12pt]{report}
+\usepackage[backend=biber,refsection=chapter,style=ieee]{biblatex}
+\usepackage{import}
+\addbibresource{Chapter_3/ch3references.bib}
+\addbibresource{Chapter_6/ch6references.bib}
+\addbibresource{Chapter_7/ch7references.bib}
+\addbibresource{Chapter_8/ch8references.bib}
+% XeLaTeX
+\usepackage{fontspec}
+\setmainfont{Times New Roman}
+% \setmonofont{Fira Code}
+\setmonofont{PT Mono}
+\usepackage{listings}
+\usepackage{lstfiracode} % https://ctan.org/pkg/lstfiracode
+\usepackage[margin=1in]{geometry}
+\usepackage{setspace}
+\usepackage{longtable}
+\usepackage{supertabular}
+\usepackage{afterpage}
+\usepackage{lipsum}
+\usepackage{circuitikz}
+\usepackage{setspace}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% or LuaLaTeX
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+\sloppy
+\setlength{\emergencystretch}{3em}
+\raggedright
+
+%\usepackage[sort]{natbib}
+%\bibliographystyle{sb}
+%    \bibpunct[:]{(}{)}{;}{a}{}{,}
+\usepackage[colorlinks=false,hidelinks]{hyperref}  %change to true if you want to see links in color for drafting; hidelinks removes the boxes around links 
+
+\ActivateVerbatimLigatures
+
+%\usepackage{doi} % turns dois into links
+\usepackage{gb4e}\noautomath %% or use expex, as preferred
+
+\lstdefinestyle{python}{
+    language=Python,
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue},
+    stringstyle=\color{red},
+    commentstyle=\color{gray},
+    showstringspaces=false,
+    frame=lines,
+    numbers=left,
+    numberstyle=\tiny\color{gray},
+    breaklines=true
+}
+
+% Custom titles for the lists
+\renewcommand{\lstlistlistingname}{List of Code Listings}
+
+\input{localpackages.tex}
+
+\title{EE 322: EE Laboratory II \\
+Final Portfolio}
+\author{Steven Placzek}
+
+\begin{document}
+
+\input{titlepage.tex}
+
+\chapter*{Abstract}
+\thispagestyle{empty}
+\emph{This portfolio documents a series of laboratory experiments conducted as part of EE322, with the objective of exploring and analyzing various MOSFET-based analog circuit topologies. The labs covered topics ranging from NMOS characterization and biasing techniques to the design and analysis of amplifiers and differential pairs. Experimental setups were implemented using the ALD1105/1106 transistor arrays and verified through simulations in LTSpice and Python-based data analysis. Circuit analyses techniques contained herein include the extraction of small-signal parameters, understanding the influence of source and load resistances on gain, and the role of feedback in stabilizing amplifier performance. Special emphasis was placed on evaluating frequency response, common-mode rejection, and the impact of grounding practices on measurement integrity. The final experiments introduced advanced concepts like S-parameter de-embedding using a Vector Network Analyzer (VNA), bridging analog design with RF characterization techniques. This comprehensive investigation demonstrates the critical interplay between theory, simulation, and practical implementation in analog circuit design.}
+
+
+\pagenumbering{roman}
+
+
+
+\addtocontents{toc}{\vspace{0pt}\protect\noindent\parbox[t]{\textwidth}{\normalsize\textcolor{black}{\textbf{Front matter}}}\par}
+
+
+%\clearpage
+%\phantomsection\addcontentsline{toc}{section}{Abstract}
+%\stepcounter{page}
+
+\singlespacing
+\setstretch{0.95}
+\tableofcontents
+%\addcontentsline{toc}{section}{Table of contents}
+\setstretch{1}
+
+\listoffigures\addcontentsline{toc}{section}{List of Figures}
+\listoftables\addcontentsline{toc}{section}{List of tables}
+
+\normalsize
+\newpage
+\pagenumbering{arabic}
+\doublespacing
+\setlength{\parindent}{1.5em}
+\chapter{Lab 1 — NMOS Characterization}
+\input{Chapter_1/Lab_01_NMOS_Characterization}
+\chapter{Lab 2 — IC Biasing Techniques}
+\input{Chapter_2/Lab_02_IC_Biasing_Techniques}
+\chapter{Lab 3 — Actively Loaded Common Source Amplifier}
+\input{Chapter_3/Lab_3_Actively_Loaded_Common_Source_Amplifier}
+\chapter{Lab 4 — Frequency Response of the Common-Source Amplifier}
+\input{Chapter_4/Lab_4}
+\chapter{Lab 5 — Frequency Response of the Common Source Amplifier with Feedback}
+\input{Chapter_5/Lab_5}
+\chapter{Lab 6 — MOS Differential Pair: Single-Ended vs Differential Signals}
+\input{Chapter_6/Lab_6}
+\chapter{Lab 7 — MOS Differential Pair: Current Mirror}
+\input{Chapter_7/Lab_7}
+\chapter{Lab 8 — VNA Measurement: De-Embedding S-Parameters}
+\input{Chapter_8/Lab_8}
+
+
+\newpage
+\appendix
+\chapter{Appendix}
+\input{Appendix/Appendix}
+
+\clearpage\singlespacing
+
+
+%\phantomsection
+
+
+\end{document}
+

@@ -1,0 +1,47 @@
+%\noindent \textbf{Code Listing A:}
+%\vspace{0.25cm}
+%\inputpython{Appendix/Python_Code/Lab_01_Updated_NMOS_Sweep.py}{1}{113}
+%\label{Code Listing:1}
+%
+%\noindent \textbf{Code Listing B:}
+%\vspace{0.25cm}
+%\inputpython{Appendix/Python_Code/Lab_01_NMOS_VGS_Sweep.py}{1}{130}
+%\label{Code Listing:2}
+
+%\noindent \textbf{Chapter 1: Experiment 1: Python Code 1}
+% \textbf{Chapter 2: Experiment 1: Python Code 1}
+% \vspace{0.25cm}
+% % \lstinputlisting[style=python, caption=Lab 02: Experiment 1: Graphs, label=lst:Ch2List1]{
+% % Appendix/Python_Code/Lab_02_Experiment_1_Graphs_no_comms.py
+% % }
+% \inputpython{Appendix/Python_Code/Lab_02_Experiment_1_Graphs_no_comms.py}{1}{100}
+% % \label{Ch2List1}
+
+% \textbf{Chapter 2: Experiment 1: Python Code 2}
+% \vspace{0.25cm}
+% % \lstinputlisting[style=python, caption=Lab 02: Experiment 1: LTSpice Simulation Data Analysis, label=lst:Ch2List2]{
+% % Appendix/Python_Code/EE_322_Lab_02_Exp_1_SIM_table_no_comments.py
+% % }
+% \inputpython{Appendix/Python_Code/EE_322_Lab_02_Exp_1_SIM_table_no_comments.py}{1}{100}
+% % \label{Ch2List2}
+
+% \textbf{Chapter 2: Experiment 2: Python Code 1}
+% \vspace{0.25cm}
+% % \lstinputlisting[style=python, caption=Lab 02: Experiment 2: Plots, label=lst:Ch2List3]{
+% % Appendix/Python_Code/Lab_02_Experiment_2_Graphs_no_comments.py
+% % }
+% \inputpython{Appendix/Python_Code/Lab_02_Experiment_2_Graphs_no_comments.py}{1}{100}
+% % \label{Ch2List3}
+
+% \textbf{Chapter 2: Experiment 2: Python Code 2}
+% \vspace{0.25cm}
+% % \lstinputlisting[style=python, caption=Lab 02: Experiment 2: Calculations for Measured Data, label=lst:Ch2List4]{Appendix/Python_Code/Lab_02_Exp_02_Meas_Table_Calc_no_comms.py
+% % }
+% \inputpython{Appendix/Python_Code/Lab_02_Exp_02_Meas_Table_Calc_no_comms.py}{1}{100}
+% % \label{Ch2List4}
+
+% \textbf{Chapter 2: Experiment 2: Python Code 3}
+% \vspace{0.25cm}
+% % \lstinputlisting[style=python, caption=Lab 02: Experiment 2: Simulated vs Measured Plots, label=lst:Ch2List5]{Appendix/Python_Code/Lab_02_Experiment_2_Sim_VS_Meas_Graph_no_comms.py}
+% \inputpython{Appendix/Python_Code/Lab_02_Experiment_2_Sim_VS_Meas_Graph_no_comms.py}{1}{100}
+% % \label{Ch2List5}
