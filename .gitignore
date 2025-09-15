@@ -32,7 +32,7 @@
 *.bbg
 *.nlo
 
-# Bibliography
+# Bibliography artifacts
 *.brf
 *.dvi
 *.idx
@@ -43,19 +43,11 @@
 *.los
 *.nls
 *.nlg
-*.nlo
 *.glo
 *.glg
 *.gls
 *.glsdefs
 *.xdy
-
-# Build directories
-/build/
-/output/
-
-# PDF output (uncomment if you don't want to track PDFs)
-# *.pdf
 
 # macOS
 .DS_Store
@@ -70,14 +62,30 @@
 *.swo
 *~
 .texpadtmp
-
-# LaTeX editors
 *.backup
-*.bak
 *.tmp
 TSWLatexianTemp*
+texput.log
 
-# Python (if using any scripts)
+# Python cache (keep .py files)
 __pycache__/
-*.py[cod]
-*$py.class
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.so
+
+# Keep these explicitly
+!*.tex
+!*.py
+!*.png
+!*.jpg
+!*.jpeg
+!*.gif
+!*.svg
+!*.eps
+!*.pdf
+
+# Except the main output PDF
+main.pdf
+ee322_Lab_Portfolio_*.pdf
