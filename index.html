@@ -1,237 +1,152 @@
- <!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EE-322 | Electrical Engineering Lab II | Final Portfolio | Steven Placzek</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #1a1a1a;
-            color: #fff;
-        }
-        
-        .header {
-            background: #0d1117;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 1px solid #30363d;
-        }
-        
-        .header h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-        
-        .controls {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .btn {
-            padding: 8px 16px;
-            background: #238636;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-size: 14px;
-            transition: background 0.2s;
-        }
-        
-        .btn:hover {
-            background: #2ea043;
-        }
-        
-        .btn.secondary {
-            background: #21262d;
-            border: 1px solid #30363d;
-        }
-        
-        .btn.secondary:hover {
-            background: #30363d;
-        }
-        
-        #pdf-viewer {
-            width: 100%;
-            height: calc(100vh - 100px);
-            border: none;
-        }
-        
-        .page-info {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: #0d1117;
-            padding: 10px 15px;
-            border-radius: 6px;
-            border: 1px solid #30363d;
-        }
-        
-        input[type="number"] {
-            width: 50px;
-            padding: 4px;
-            background: #0d1117;
-            color: white;
-            border: 1px solid #30363d;
-            border-radius: 4px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>EE-322 Final Portfolio | Steven Placzek</title>
+  <meta name="description" content="EE-322 Electrical Engineering Lab II final portfolio. MOSFET analog circuits, LTspice, and Python analysis." />
+
+  <!-- Open Graph / LinkedIn -->
+  <meta property="og:title" content="EE-322 Final Portfolio | Steven Placzek" />
+  <meta property="og:description" content="MOSFET analog circuit labs with LTspice + Python analysis. Interactive viewer + PDF download." />
+  <meta property="og:type" content="website" />
+  <!-- Put an image in the repo and point to it (example filename shown below) -->
+  <meta property="og:image" content="portfolio_qr_linkedin.png" />
+
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.08);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.68);
+      --border: rgba(255,255,255,0.12);
+      --accent: #7dd3fc;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: radial-gradient(1200px 600px at 20% 0%, rgba(125,211,252,0.18), transparent 60%),
+                  radial-gradient(1000px 600px at 90% 10%, rgba(167,139,250,0.16), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+    }
+
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 28px 18px 18px; }
+
+    header {
+      display: grid;
+      gap: 10px;
+      padding: 18px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--panel2), var(--panel));
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+    }
+
+    .title {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    h1 { margin: 0; font-size: 22px; letter-spacing: 0.2px; }
+    .byline { color: var(--muted); font-size: 14px; }
+    .meta { color: var(--muted); font-size: 14px; line-height: 1.45; max-width: 80ch; }
+
+    .btnrow { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px; }
+
+    a.btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.06);
+      padding: 10px 12px;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+    a.btn:hover { border-color: rgba(255,255,255,0.22); background: rgba(255,255,255,0.09); }
+    a.btn.primary { border-color: rgba(125,211,252,0.35); background: rgba(125,211,252,0.12); }
+
+    .viewerShell {
+      margin-top: 14px;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(0,0,0,0.25);
+    }
+
+    .viewerTop {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      border: 1px solid var(--border);
+      border-bottom-color: rgba(255,255,255,0.08);
+      padding: 2px 6px;
+      border-radius: 8px;
+      color: rgba(255,255,255,0.80);
+      background: rgba(255,255,255,0.04);
+    }
+
+    iframe {
+      width: 100%;
+      height: min(78vh, 980px);
+      border: 0;
+      background: #111;
+    }
+
+    footer { color: var(--muted); font-size: 12px; padding: 14px 2px 0; }
+    footer a { color: var(--muted); }
+  </style>
 </head>
+
 <body>
-    <div class="header">
-        <h1>WNEU - EE-322 Electrical Engineering Lab II - Final Portfolio</h1>
-        <div class="controls">
-            <button class="btn secondary" onclick="previousPage()">
-                ← Previous
-            </button>
-            
-            <span style="display: inline-flex; align-items: center; gap: 5px;">
-                Page <input type="number" id="pageNum" value="1" min="1" onchange="goToPage()"> 
-                of <span id="totalPages">-</span>
-            </span>
-            
-            <button class="btn secondary" onclick="nextPage()">
-                Next →
-            </button>
-            
-            <button class="btn secondary" onclick="zoomIn()">
-                Zoom In
-            </button>
-            
-            <button class="btn secondary" onclick="zoomOut()">
-                Zoom Out
-            </button>
-            
-            <a href="EE_322_Final_Lab_Portfolio_Placzek.pdf" download class="btn">
-                [⬇][Download PDF]
-            </a>
-            
-            <a href="https://github.com/SPkHz/EE-322-Electrical-Engineering-Lab-II--Final-Portfolio" class="btn">
-                [View LaTeX Source]
-            </a>
-        </div>
-    </div>
-    
-    <div id="viewerContainer">
-        <canvas id="pdfCanvas"></canvas>
+  <div class="wrap">
+    <header>
+      <div class="title">
+        <h1>EE-322 Electrical Engineering Lab II — Final Portfolio</h1>
+        <div class="byline">Steven Placzek</div>
+      </div>
+
+      <div class="meta">
+        MOSFET analog circuit labs with LTspice and Python data analysis. Includes biasing, gain/frequency response,
+        differential pairs, feedback, and VNA de-embedding.
+      </div>
+
+      <div class="btnrow">
+        <a class="btn primary" href="EE_322_Final_Lab_Portfolio_Placzek.pdf" target="_blank" rel="noopener">Download PDF</a>
+        <a class="btn" href="https://github.com/SPkHz/EE-322-Electrical-Engineering-Lab-II--Final-Portfolio" target="_blank" rel="noopener">View LaTeX Source</a>
+        <!-- Later: point this page to main portfolio hub -->
+        <a class="btn" href="https://github.com/SPkHz" target="_blank" rel="noopener">More Projects</a>
+      </div>
+    </header>
+
+    <div class="viewerShell">
+      <div class="viewerTop">
+        <div>Inline viewer</div>
+        <div>Tip: <span class="kbd">Ctrl</span> + <span class="kbd">+</span>/<span class="kbd">-</span> to zoom</div>
+      </div>
+      <iframe src="EE_322_Final_Lab_Portfolio_Placzek.pdf#view=FitH" title="EE-322 Final Portfolio PDF"></iframe>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        
-        let pdfDoc = null,
-            pageNum = 1,
-            pageRendering = false,
-            pageNumPending = null,
-            scale = 1.5,
-            canvas = document.getElementById('pdfCanvas'),
-            ctx = canvas.getContext('2d');
-        
-        function renderPage(num) {
-            pageRendering = true;
-            pdfDoc.getPage(num).then(function(page) {
-                let viewport = page.getViewport({scale: scale});
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-                
-                canvas.style.display = 'block';
-                canvas.style.margin = '0 auto';
-                
-                let renderContext = {
-                    canvasContext: ctx,
-                    viewport: viewport
-                };
-                let renderTask = page.render(renderContext);
-                
-                renderTask.promise.then(function() {
-                    pageRendering = false;
-                    if (pageNumPending !== null) {
-                        renderPage(pageNumPending);
-                        pageNumPending = null;
-                    }
-                });
-            });
-            
-            document.getElementById('pageNum').value = num;
-        }
-        
-        function queueRenderPage(num) {
-            if (pageRendering) {
-                pageNumPending = num;
-            } else {
-                renderPage(num);
-            }
-        }
-        
-        function previousPage() {
-            if (pageNum <= 1) {
-                return;
-            }
-            pageNum--;
-            queueRenderPage(pageNum);
-        }
-        
-        function nextPage() {
-            if (pageNum >= pdfDoc.numPages) {
-                return;
-            }
-            pageNum++;
-            queueRenderPage(pageNum);
-        }
-        
-        function goToPage() {
-            let input = document.getElementById('pageNum');
-            let page = parseInt(input.value);
-            if (page >= 1 && page <= pdfDoc.numPages) {
-                pageNum = page;
-                queueRenderPage(pageNum);
-            } else {
-                input.value = pageNum;
-            }
-        }
-        
-        function zoomIn() {
-            scale += 0.25;
-            queueRenderPage(pageNum);
-        }
-        
-        function zoomOut() {
-            if (scale > 0.5) {
-                scale -= 0.25;
-                queueRenderPage(pageNum);
-            }
-        }
-        
-        // Load PDF
-        pdfjsLib.getDocument('EE_322_Final_Lab_Portfolio_Placzek.pdf').promise.then(function(pdfDoc_) {
-            pdfDoc = pdfDoc_;
-            document.getElementById('totalPages').textContent = pdfDoc.numPages;
-            renderPage(pageNum);
-        }).catch(function(error) {
-            console.error('Error loading PDF:', error);
-            document.getElementById('viewerContainer').innerHTML = 
-                '<p style="text-align: center; padding: 50px;">Error loading PDF. Please <a href="EE_322_Final_Lab_Portfolio_Placzek.pdf" style="color: #58a6ff;">download it directly</a>.</p>';
-        });
-        
-        // Keyboard navigation
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'ArrowLeft') previousPage();
-            if (e.key === 'ArrowRight') nextPage();
-        });
-    </script>
+    <footer>
+      Source repo: <a href="https://github.com/SPkHz/EE-322-Electrical-Engineering-Lab-II--Final-Portfolio" target="_blank" rel="noopener">SPkHz/EE-322-Electrical-Engineering-Lab-II--Final-Portfolio</a>
+    </footer>
+  </div>
 </body>
 </html>
