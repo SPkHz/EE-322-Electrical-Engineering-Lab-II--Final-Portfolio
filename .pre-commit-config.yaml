@@ -1,0 +1,45 @@
+repos:
+  - repo: local
+    hooks:
+      - id: gitleaks-system
+        name: gitleaks (system)
+        entry: gitleaks protect --staged --redact
+        language: system
+        pass_filenames: false
+      - id: prevent-plaintext-secret-files
+        name: prevent plaintext secret files under secrets/
+        entry: >-
+          bash -lc 'for f in "$@"; do
+          case "$f" in
+            secrets/*)
+              case "$f" in
+                secrets/.gitkeep|secrets/README.md|*.example|*.example.*|*.sops.env|*.sops.yaml|*.sops.yml|*.sops.json) ;;
+                *) echo "plaintext secret file blocked: $f" >&2; exit 1 ;;
+              esac
+            ;;
+          esac
+          done' --
+        language: system
+        files: ^secrets/
+      - id: validate-sops-secrets
+        name: validate sops-encrypted secrets
+        entry: >-
+          bash -lc 'for f in "$@"; do
+          [ -f "$f" ] || continue
+          sops -d "$f" >/dev/null || exit 1
+          done' --
+        language: system
+        files: ^secrets/.*\.sops\.(env|ya?ml|json)$
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: detect-private-key
+      - id: check-added-large-files
+        args: [--maxkb=50000]
+      - id: check-merge-conflict
+      - id: check-yaml
+        args: [--allow-multiple-documents]
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
